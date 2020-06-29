@@ -5,12 +5,14 @@ import Modelo.*;
 import Vista.Vista;
 import Vista.Vista_Admin_An;
 import Vista.Vista_Admin_C_An;
+import Vista.Vista_Admin_E;
 import estructuras.Lista_Enlazada;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,7 @@ public class Controlador_Adm_C_An {
     
     Vista_Admin_C_An vista;
     private boolean flag, error;
-
+    Hashtable<String, Vista_Admin_C_An> tabladatos;
     public Controlador_Adm_C_An() {
         this.vista = new Vista_Admin_C_An();
         this.vista.getBtValidar().setOnAction(new EventoValidar());
@@ -40,7 +42,24 @@ public class Controlador_Adm_C_An {
 
         @Override
         public void handle(ActionEvent event) {
-
+            registrarCurso(tabladatos);
+        }
+        private void registrarCurso(Hashtable<String, Vista_Admin_C_An> tabladatos) {
+            Vista_Admin_C_An curso= new Vista_Admin_C_An();
+            curso.getTfAsignatura().getText();
+            curso.getTfProfesor().getText();
+            curso.getTfGrupo().getText();
+            
+            
+            if(tabladatos.containsKey(curso.getTfGrupo())==false){
+                tabladatos.put(curso.getTfGrupo().getText(), curso);
+                System.out.println("Se creo Usuario ");
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "El usuario ya existe","Advertencia",JOptionPane.WARNING_MESSAGE);
+            }
+            
+            
         }
     }
 

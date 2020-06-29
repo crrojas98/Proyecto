@@ -4,6 +4,7 @@ package Controlador;
 import Modelo.*;
 import Vista.Vista;
 import Vista.Vista_Admin_An;
+import Vista.Vista_Admin_E;
 import estructuras.Lista_Enlazada;
 import estructuras.arbol;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,7 @@ public class Controlador_Adm_Est_An {
     arbol cuentas;
     Vista_Admin_An vista;
     private boolean flag, error;
-
+    Hashtable<String, Vista_Admin_An> tabladatos;
     public Controlador_Adm_Est_An() {
         this.vista = new Vista_Admin_An();
         this.vista.getBtValidar().setOnAction(new EventoValidar());
@@ -42,7 +44,26 @@ public class Controlador_Adm_Est_An {
         public void handle(ActionEvent event) {
             Listas lista = new Listas(1);
             cuentas = lista.getCuentas();
-
+            registrarPersona(tabladatos);
+        }
+        private void registrarPersona(Hashtable<String, Vista_Admin_An> tabladatos) {
+            Vista_Admin_An persona= new Vista_Admin_An();
+            persona.getTfID().getText();
+            persona.getTfNombres().getText();
+            persona.getTfApellidos().getText();
+            persona.getTfUser().getText();
+            persona.getTfCorreo().getText();
+            persona.getTfConfContra();
+            
+            if(tabladatos.containsKey(persona.getTfID())==false){
+                tabladatos.put(persona.getTfID().getText(), persona);
+                System.out.println("Se creo Usuario ");
+            }
+            else{
+               JOptionPane.showMessageDialog(null, "El usuario ya existe","Advertencia",JOptionPane.WARNING_MESSAGE);
+            }
+            
+            
         }
     }
 

@@ -3,6 +3,7 @@ package Controlador;
 
 import Modelo.*;
 import Vista.Vista;
+import Vista.Vista_Admin_An;
 import Vista.Vista_Admin_E;
 import estructuras.Lista_Enlazada;
 import estructuras.arbol;
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -23,7 +25,7 @@ public class Controlador_Adm_Profe_E {
     arbol cuentas;
     Vista_Admin_E vista;
     private boolean flag, error;
-
+    Hashtable<String, Vista_Admin_E> tabladatos;
     public Controlador_Adm_Profe_E() {
         this.vista = new Vista_Admin_E();
         this.vista.getBtValidar().setOnAction(new EventoValidar());
@@ -42,7 +44,18 @@ public class Controlador_Adm_Profe_E {
         public void handle(ActionEvent event) {
             Listas lista = new Listas(1);
             cuentas = lista.getCuentas();
-
+            eliminarPersona(tabladatos);
+        }
+        private void eliminarPersona(Hashtable<String, Vista_Admin_E> tabladatos) {
+            String id = vista.getTfID().getText();
+            if(tabladatos.containsKey(id)){
+                tabladatos.remove(id);
+                JOptionPane.showMessageDialog(null, "Se ha elimincado correctamente");
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"El documentono existe!! ","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
     }
 

@@ -4,6 +4,7 @@ package Controlador;
 import Modelo.*;
 import Vista.Vista;
 import Vista.Vista_Admin_Ac;
+import Vista.Vista_Admin_E;
 import estructuras.Lista_Enlazada;
 import estructuras.arbol;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -44,6 +46,7 @@ public class Controlador_Adm_Est_Ac {
             cuentas = lista.getCuentas();
 
         }
+        
     }
 
     private class EventoRegresar implements EventHandler<ActionEvent> {

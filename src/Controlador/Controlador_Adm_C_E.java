@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,7 +25,7 @@ public class Controlador_Adm_C_E {
     arbol cuentas;
     Vista_Admin_C_E vista;
     private boolean flag, error;
-
+    Hashtable<String, Vista_Admin_C_E> tabladatos;
     public Controlador_Adm_C_E() {
         this.vista = new Vista_Admin_C_E();
         this.vista.getBtValidar().setOnAction(new EventoValidar());
@@ -43,7 +44,18 @@ public class Controlador_Adm_C_E {
         public void handle(ActionEvent event) {
             Listas lista = new Listas(1);
             cuentas = lista.getCuentas();
-
+            eliminarCurso(tabladatos);
+        }
+        private void eliminarCurso(Hashtable<String, Vista_Admin_C_E> tabladatos) {
+            String id = vista.getTfGrupo().getText();
+            if(tabladatos.containsKey(id)){
+                tabladatos.remove(id);
+                JOptionPane.showMessageDialog(null, "Se ha elimincado correctamente");
+            }else
+            {
+                JOptionPane.showMessageDialog(null,"El documentono existe!! ","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            
         }
     }
 

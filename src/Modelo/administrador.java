@@ -7,4 +7,5 @@ public class administrador extends Cuenta {
         super(rol, nombre, apellido, correo, id, contraseña);
     }
     
+    
 }
