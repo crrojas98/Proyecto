@@ -11,17 +11,22 @@ package estructuras;
  */
 public class nodoHash {
     char estado;
-    String NombreVariable;
-    String tipo;
-    String ambito;
-    String valor;
+    String id;
+    String nombre;
+    String apellido;
+    String Usuario;
+    String correo;
+    String contraseña;
 
-    public nodoHash(String NombreVariable, String tipo, String valor, String ambito) {
-        
-        this.NombreVariable = NombreVariable;
-        this.tipo = tipo;
-        this.valor = valor;
-        this.ambito=ambito;
+    public nodoHash(String id, String nombre, String apellido, String Usuario, String correo, String contraseña) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.Usuario = Usuario;
+        this.correo = correo;
+        this.contraseña = contraseña;
     }
+
+    
     
 }

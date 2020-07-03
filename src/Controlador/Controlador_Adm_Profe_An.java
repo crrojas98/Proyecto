@@ -6,13 +6,14 @@ import Vista.Vista;
 import Vista.Vista_Admin_An;
 import Vista.Vista_Admin_E;
 import estructuras.Lista_Enlazada;
+import estructuras.TableHash;
 import estructuras.arbol;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Hashtable;
+
 import java.util.Scanner;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +26,8 @@ public class Controlador_Adm_Profe_An {
     arbol cuentas;
     Vista_Admin_An vista;
     private boolean flag, error;
-    Hashtable<String, Vista_Admin_An> tabladatos;
+    
+    TableHash tabladatdoce;
 
     public Controlador_Adm_Profe_An() {
         this.vista = new Vista_Admin_An();
@@ -45,24 +47,21 @@ public class Controlador_Adm_Profe_An {
         public void handle(ActionEvent event) {
             Listas lista = new Listas(1);
             cuentas = lista.getCuentas();
-            registrarPersona(tabladatos);
-        }
-        private void registrarPersona(Hashtable<String, Vista_Admin_An> tabladatos) {
-            Vista_Admin_An persona= new Vista_Admin_An();
-            persona.getTfID().getText();
-            persona.getTfNombres().getText();
-            persona.getTfApellidos().getText();
-            persona.getTfUser().getText();
-            persona.getTfCorreo().getText();
-            persona.getTfConfContra();
             
-            if(tabladatos.containsKey(persona.getTfID())==false){
-                tabladatos.put(persona.getTfID().getText(), persona);
-                System.out.println("Se creo Usuario ");
-            }
-            else{
-               JOptionPane.showMessageDialog(null, "El usuario ya existe","Advertencia",JOptionPane.WARNING_MESSAGE);
-            }
+            registrar(tabladatdoce);
+        }
+         private void registrar(TableHash tabladatdoce) {
+            Vista_Admin_An persona= new Vista_Admin_An();
+            
+            String Id=persona.getTfID().getText();
+            String Nombre=persona.getTfNombres().getText();
+            String Apellido=persona.getTfApellidos().getText();
+            String Usuario=persona.getTfUser().getText();
+            String Correo=persona.getTfCorreo().getText();
+            String Contraseña= new String(persona.getTfConfContra().getText());
+            
+            tabladatdoce.insertar(Id, Nombre, Apellido, Usuario, Correo, Contraseña);
+                      
             
             
         }
